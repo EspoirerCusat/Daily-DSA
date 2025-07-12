@@ -7,8 +7,6 @@ https://www.geeksforgeeks.org/problems/count-number-of-substrings4528/1
 
 
 **/
-
-
 class Solution {
     //At most k distinct 
     public int f(string s, int k){
@@ -40,3 +38,37 @@ class Solution {
         return f(s, k) - f(s, k-1);
     }
 }
+
+
+
+// Longest Substring with K Uniques
+class Solution {
+    public int longestKSubstr(string s, int k) {
+        // code here
+        int n = s.Length;
+        int dist = 0;
+        int[] freq = new int[26];
+        int ans = 0;
+        int i = 0; int j = 0;
+        while(j < n){
+            if(freq[s[j] - 'a'] == 0) dist++;
+            freq[s[j] - 'a']++;
+            while(dist > k){
+                freq[s[i]-'a']--;
+                if(freq[s[i]-'a'] == 0) dist--;
+                i++;
+            }
+            if(dist == k){
+                ans = Math.Max(ans, j - i + 1);
+            }
+            j++;
+        }
+        return ans == 0 ? -1 : ans;
+    }
+}
+
+
+
+
+
+
