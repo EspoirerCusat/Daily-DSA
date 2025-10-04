@@ -16,3 +16,24 @@ class Solution {
         return false;
     }
 }
+
+//log(n)
+
+class Solution {
+    public boolean searchMatrix(int[][] matrix, int target) {
+        int s = 0;
+        int e = matrix.length-1;
+        int idx = e;
+        while(s <= e){
+            int mid = (s + e) / 2;
+            if(matrix[mid][0] <= target){
+                idx = mid;
+                s = mid + 1;
+            }else{
+                e = mid - 1;
+            }
+        }
+        int idxE = Arrays.binarySearch(matrix[idx], target);
+        return idxE < 0 ? false : true;
+    }
+}
